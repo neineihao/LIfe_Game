@@ -9,6 +9,7 @@ class Life{
   void print();
   void update();
   int neighbor_count(int row, int col);
+  bool user_says_yes();
  private:
   int grid[maxrow + 2][maxcol + 2];
 

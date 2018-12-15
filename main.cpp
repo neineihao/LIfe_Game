@@ -17,21 +17,7 @@ void instructions(){
        << endl;
 }
 
-bool user_says_yes(){
-  int c;
-  bool initial_response = true;
-  do{
-    if(initial_response)
-      cout << "(y, n)?" << endl;
-    else
-      cout << "Respond with either y or n: " << endl;
-    do{
-      c = cin.get();
-    } while(c == '\n' || c == ' ' || c == '\t');
-    initial_response = false;
-  } while(c != 'y' && c!= 'Y' && c != 'n' && c!= 'N');
-  return (c == 'y' || c == 'Y');
-}
+
 
 
 void neighbor_number(Life lifeobj){
@@ -52,7 +38,7 @@ int main(){
   do{
     configuration.print();
     configuration.update();
-    neighbor_number(configuration);
-    wait_continue = user_says_yes();
+    wait_continue = configuration.user_says_yes(); 
+    // neighbor_number(configuration);
   } while(wait_continue == true);    
 }

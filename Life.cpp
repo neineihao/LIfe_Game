@@ -10,13 +10,32 @@ int Life::neighbor_count(int row, int col){
   */
   int i, j;
   int count = 0;
-  for(i = row - 1; i <= row + 1; row ++){
-    for(j = col -1; j <= col + 1; col ++){
+  for(i = row - 1; i <= row + 1; i ++){
+    for(j = col - 1; j <= col + 1; j ++){
+      // user_says_yes();
+      // cout << "row: " << i << ", column: "<< j << endl;
       count += grid[i][j];
     }
   }
+
   count -= grid[row][col];
   return count; 
+}
+
+bool Life::user_says_yes(){
+  int c;
+  bool initial_response = true;
+  do{
+    if(initial_response)
+      cout << "(y, n)?" << endl;
+    else
+      cout << "Respond with either y or n: " << endl;
+    do{
+      c = cin.get();
+    } while(c == '\n' || c == ' ' || c == '\t');
+    initial_response = false;
+  } while(c != 'y' && c!= 'Y' && c != 'n' && c!= 'N');
+  return (c == 'y' || c == 'Y');
 }
 
 void Life::print(){
@@ -40,7 +59,7 @@ void Life::print(){
 void Life::update(){
   int row, col;
   int new_grid[maxrow + 2][maxcol +2];
-  for(row = 1; row <= maxrow; row++ )
+  for(row = 1; row <= maxrow; row++ ){
     for(col = 1; col <= maxcol; col++){
       switch(neighbor_count(row, col)){
       case 2:
@@ -54,6 +73,7 @@ void Life::update(){
 	break;
       }  
     }
+  }
   for(row = 1; row <= maxrow; row++)
     for(col = 1; col <= maxcol; col++){
       grid[row][col] = new_grid[row][col];
@@ -71,7 +91,7 @@ void Life::init(){
   while(row != -1 || col != -1){
     if(row >= 1 && row <= maxrow)
       if(col >= 1 && col <= maxcol){
-	cout << "place at "<< "row: " << row << ", col: " << endl;
+	cout << "place at "<< "row: " << row << ", col: " << col << endl;
 	grid[row][col] = 1;
       }
       else
